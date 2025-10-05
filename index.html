@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Michal Bürgermeister - React Developer CV</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #2c3e50;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header with photo */
+    .header {
+      background-image: url('pozadi.webp');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .profile-photo-wrapper {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin: 0 auto 30px;
+      position: relative;
+      z-index: 10;
+      animation: fadeInScale 1s ease-out;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .profile-photo-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('pozadi.webp');
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .profile-photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: relative;
+      z-index: 1;
+      object-fit: cover;
+      mix-blend-mode: normal;
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .header h1 {
+      font-size: 48px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 10;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .header .subtitle {
+      font-size: 24px;
+      font-weight: 300;
+      margin-bottom: 30px;
+      opacity: 0.95;
+      position: relative;
+      z-index: 10;
+      animation: fadeInUp 1s ease-out 0.4s both;
+      color: white;
+    }
+
+    .subtitle .react { color: rgb(97,218,251); font-weight: 600; }
+    .subtitle .typescript { color: rgb(239,68,68); font-weight: 600; }
+    .subtitle .ai { color: #000000; font-weight: 600; }
+    .subtitle .integration { color: #000000; font-weight: 600; }
+    .subtitle .specialist { color: #000000; font-weight: 600; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      position: relative;
+      z-index: 10;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: white;
+      color: #2c3e50;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .contact-btn i {
+      font-size: 18px;
+    }
+
+    .contact-btn:nth-child(1) { background: linear-gradient(135deg, rgb(59,130,246), rgb(147,51,234)); color: white; }
+    .contact-btn:nth-child(2) { background: linear-gradient(135deg, rgb(236,72,153), rgb(239,68,68)); color: white; }
+    .contact-btn:nth-child(3) { background: linear-gradient(135deg, rgb(251,146,60), rgb(234,179,8)); color: white; }
+    .contact-btn:nth-child(4) { background: linear-gradient(135deg, rgb(16,185,129), rgb(34,211,238)); color: white; }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: -50px auto 0;
+      padding: 0 20px 60px;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Section */
+    .section {
+      background: white;
+      border-radius: 20px;
+      padding: 50px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .section-title i {
+      font-size: 36px;
+    }
+
+    /* Colorful section titles */
+    .section:nth-child(1) .section-title {
+      background: linear-gradient(to right, rgb(16,185,129), rgb(34,211,238));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section:nth-child(2) .section-title {
+      background: linear-gradient(to right, rgb(236,72,153), rgb(239,68,68));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section:nth-child(3) .section-title {
+      background: linear-gradient(to right, rgb(59,130,246), rgb(147,51,234));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section:nth-child(4) .section-title {
+      background: linear-gradient(to right, rgb(251,146,60), rgb(234,179,8));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section:nth-child(5) .section-title {
+      background: linear-gradient(to right, rgb(99,102,241), rgb(168,85,247));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section:nth-child(6) .section-title {
+      background: linear-gradient(to right, rgb(20,184,166), rgb(6,182,212));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .skill-card {
+      border-radius: 15px;
+      padding: 25px;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .skill-card:nth-child(1) { background: linear-gradient(135deg, rgba(16,185,129,0.9), rgba(16,185,129,0.7)); }
+    .skill-card:nth-child(2) { background: linear-gradient(135deg, rgba(59,130,246,0.9), rgba(59,130,246,0.7)); }
+    .skill-card:nth-child(3) { background: linear-gradient(135deg, rgba(236,72,153,0.9), rgba(236,72,153,0.7)); }
+    .skill-card:nth-child(4) { background: linear-gradient(135deg, rgba(251,146,60,0.9), rgba(251,146,60,0.7)); }
+    .skill-card:nth-child(5) { background: linear-gradient(135deg, rgba(147,51,234,0.9), rgba(147,51,234,0.7)); }
+    .skill-card:nth-child(6) { background: linear-gradient(135deg, rgba(34,211,238,0.9), rgba(34,211,238,0.7)); }
+
+    .skill-card h3 {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      color: #000000;
+    }
+
+    .skill-card p {
+      color: #000000;
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 600;
+    }
+
+    /* Project Cards - LUXUSNÍ DESIGN */
+    .project-card {
+      border-radius: 25px;
+      padding: 45px;
+      margin-bottom: 35px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+    }
+
+    /* Každý projekt má vlastní gradient pozadí */
+    .project-card:nth-child(1) {
+      background: linear-gradient(135deg, rgba(251,146,60,0.95), rgba(234,179,8,0.85));
+    }
+
+    .project-card:nth-child(2) {
+      background: linear-gradient(135deg, rgba(236,72,153,0.95), rgba(239,68,68,0.85));
+    }
+
+    .project-card:nth-child(3) {
+      background: linear-gradient(135deg, rgba(99,102,241,0.95), rgba(168,85,247,0.85));
+    }
+
+    .project-card:nth-child(4) {
+      background: linear-gradient(135deg, rgba(16,185,129,0.95), rgba(34,211,238,0.85));
+    }
+
+    .project-card h3 {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      color: #000000;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-meta {
+      color: #000000;
+      font-weight: 700;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+      opacity: 0.9;
+    }
+
+    .project-card p {
+      color: #000000;
+      margin-bottom: 14px;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+      font-weight: 500;
+    }
+
+    .project-card strong {
+      font-weight: 900;
+      color: #000000;
+    }
+
+    .project-links {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      background: #000000;
+      color: white;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      font-size: 15px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .project-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      background: #1a1a1a;
+    }
+
+    /* Education Cards - LUXUSNÍ */
+    .education-card {
+      border-radius: 20px;
+      padding: 35px;
+      margin-bottom: 30px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .education-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+
+    .education-card:nth-child(1) {
+      background: linear-gradient(135deg, rgba(59,130,246,0.9), rgba(147,51,234,0.8));
+    }
+
+    .education-card:nth-child(2) {
+      background: linear-gradient(135deg, rgba(236,72,153,0.9), rgba(239,68,68,0.8));
+    }
+
+    .education-card:nth-child(3) {
+      background: linear-gradient(135deg, rgba(16,185,129,0.9), rgba(34,211,238,0.8));
+    }
+
+    .education-card h4 {
+      font-size: 24px;
+      font-weight: 900;
+      color: #000000;
+      margin-bottom: 12px;
+    }
+
+    .education-where {
+      color: #000000;
+      font-weight: 700;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.9;
+    }
+
+    .education-card p {
+      color: #000000;
+      line-height: 1.9;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .cert-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      background: #000000;
+      color: white;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      font-size: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .cert-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      background: #1a1a1a;
+    }
+
+    /* Experience List */
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 15px;
+      line-height: 1.8;
+      color: #2c3e50;
+    }
+
+    ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: rgb(236,72,153);
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    /* Languages - LUXUSNÍ STYLE */
+    .languages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .language-card {
+      border-radius: 20px;
+      padding: 35px;
+      transition: all 0.4s ease;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .language-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .language-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .language-card:hover::before {
+      opacity: 1;
+    }
+
+    .language-card:nth-child(1) {
+      background: linear-gradient(135deg, rgba(239,68,68,0.9), rgba(236,72,153,0.8));
+    }
+
+    .language-card:nth-child(1)::before {
+      color: rgb(239,68,68);
+    }
+
+    .language-card:nth-child(2) {
+      background: linear-gradient(135deg, rgba(59,130,246,0.9), rgba(147,51,234,0.8));
+    }
+
+    .language-card:nth-child(2)::before {
+      color: rgb(59,130,246);
+    }
+
+    .language-card strong {
+      display: block;
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      color: #000000;
+    }
+
+    .language-card span {
+      color: #000000;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    /* Professional Timeline - LUXUSNÍ ČASOVÁ OSA */
+    .timeline-container {
+      position: relative;
+      padding-left: 140px;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 70px;
+      top: 30px;
+      bottom: 30px;
+      width: 3px;
+      background: linear-gradient(180deg,
+        rgba(99,102,241,0.3) 0%,
+        rgba(168,85,247,0.3) 50%,
+        rgba(20,184,166,0.3) 100%
+      );
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateX(-30px);
+      animation: slideInTimeline 0.6s ease-out forwards;
+    }
+
+    .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.3s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.5s; }
+
+    @keyframes slideInTimeline {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .timeline-year {
+      position: absolute;
+      left: -140px;
+      top: 0;
+      width: 100px;
+      text-align: center;
+    }
+
+    .timeline-year-number {
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 5px;
+      background: linear-gradient(135deg, currentColor, currentColor);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .timeline-item:nth-child(1) .timeline-year-number { color: rgb(99,102,241); }
+    .timeline-item:nth-child(2) .timeline-year-number { color: rgb(168,85,247); }
+    .timeline-item:nth-child(3) .timeline-year-number { color: rgb(20,184,166); }
+
+    .timeline-year-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6c757d;
+    }
+
+
+    .timeline-content {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      border: 2px solid;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-item:nth-child(1) .timeline-content { border-color: rgba(99,102,241,0.2); }
+    .timeline-item:nth-child(2) .timeline-content { border-color: rgba(168,85,247,0.2); }
+    .timeline-item:nth-child(3) .timeline-content { border-color: rgba(20,184,166,0.2); }
+
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, currentColor, transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .timeline-item:nth-child(1) .timeline-content::before { color: rgb(99,102,241); }
+    .timeline-item:nth-child(2) .timeline-content::before { color: rgb(168,85,247); }
+    .timeline-item:nth-child(3) .timeline-content::before { color: rgb(20,184,166); }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+
+    .timeline-content:hover::before {
+      opacity: 1;
+    }
+
+    .timeline-role {
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, currentColor, currentColor);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .timeline-item:nth-child(1) .timeline-role { color: rgb(99,102,241); }
+    .timeline-item:nth-child(2) .timeline-role { color: rgb(168,85,247); }
+    .timeline-item:nth-child(3) .timeline-role { color: rgb(20,184,166); }
+
+    .timeline-period {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .timeline-item:nth-child(1) .timeline-period { background: linear-gradient(135deg, rgb(99,102,241), rgb(139,92,246)); }
+    .timeline-item:nth-child(2) .timeline-period { background: linear-gradient(135deg, rgb(168,85,247), rgb(217,70,239)); }
+    .timeline-item:nth-child(3) .timeline-period { background: linear-gradient(135deg, rgb(20,184,166), rgb(6,182,212)); }
+
+    .timeline-description {
+      color: #2c3e50;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .timeline-highlights {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .timeline-highlights li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 12px;
+      color: #2c3e50;
+      line-height: 1.7;
+    }
+
+    .timeline-highlights li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .timeline-item:nth-child(1) .timeline-highlights li::before { color: rgb(99,102,241); }
+    .timeline-item:nth-child(2) .timeline-highlights li::before { color: rgb(168,85,247); }
+    .timeline-item:nth-child(3) .timeline-highlights li::before { color: rgb(20,184,166); }
+
+    /* Sticky Navigation Menu - LUXUSNÍ */
+    .cv-nav {
+      position: fixed;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .nav-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      border: 2px solid rgba(99,102,241,0.6);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-dot:hover {
+      transform: scale(1.3);
+      background: rgba(99,102,241,0.8);
+      box-shadow: 0 0 15px rgba(99,102,241,0.6);
+    }
+
+    .nav-dot.active {
+      background: linear-gradient(135deg, rgb(99,102,241), rgb(147,51,234));
+      border-color: rgb(99,102,241);
+      box-shadow: 0 0 20px rgba(99,102,241,0.8);
+      transform: scale(1.4);
+    }
+
+    .nav-tooltip {
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, rgb(99,102,241), rgb(147,51,234));
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 25px rgba(99,102,241,0.6);
+    }
+
+    .nav-tooltip::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid rgb(99,102,241);
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+    }
+
+    .nav-dot.active .nav-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Certificate Modal - LUXUSNÍ */
+    .cert-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .cert-modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+    }
+
+    .cert-modal-content {
+      position: relative;
+      max-width: 95%;
+      max-height: 95vh;
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      transform: scale(0.7);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .cert-modal.active .cert-modal-content {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .cert-modal-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, rgb(239,68,68), rgb(236,72,153));
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(239,68,68,0.4);
+    }
+
+    .cert-modal-close:hover {
+      transform: rotate(90deg) scale(1.1);
+      box-shadow: 0 8px 30px rgba(239,68,68,0.6);
+    }
+
+    .cert-modal-img {
+      width: 100%;
+      height: auto;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 15px;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Gallery Navigation */
+    .cert-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, rgb(59,130,246), rgb(147,51,234));
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(59,130,246,0.4);
+      z-index: 10;
+    }
+
+    .cert-nav:hover {
+      transform: translateY(-50%) scale(1.15);
+      box-shadow: 0 8px 30px rgba(59,130,246,0.6);
+    }
+
+    .cert-nav-prev {
+      left: -80px;
+    }
+
+    .cert-nav-next {
+      right: -80px;
+    }
+
+    .cert-nav.hidden {
+      display: none;
+    }
+
+    /* Page Counter */
+    .cert-page-counter {
+      position: absolute;
+      bottom: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, rgb(16,185,129), rgb(34,211,238));
+      color: white;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 0 5px 20px rgba(16,185,129,0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header h1 { font-size: 36px; }
+      .header .subtitle { font-size: 18px; }
+      .profile-photo-wrapper { width: 150px; height: 150px; }
+      .section { padding: 30px 25px; }
+      .section-title { font-size: 26px; }
+      .skills-grid, .languages-grid { grid-template-columns: 1fr; }
+      .contact-buttons { flex-direction: column; }
+      .cert-modal-content { max-width: 98%; padding: 10px; }
+      .cert-modal-close { top: -45px; width: 45px; height: 45px; }
+      .cert-nav-prev { left: 10px; }
+      .cert-nav-next { right: 10px; }
+      .cert-nav { width: 50px; height: 50px; font-size: 24px; }
+      .cert-page-counter { bottom: 10px; font-size: 12px; }
+
+      /* Timeline responsive */
+      .timeline-container { padding-left: 20px; }
+      .timeline-line { display: none; }
+      .timeline-year {
+        position: static;
+        width: 100%;
+        text-align: left;
+        margin-bottom: 15px;
+        padding-left: 0;
+      }
+      .timeline-year-number { font-size: 24px; display: inline-block; margin-right: 10px; }
+      .timeline-year-label { display: inline-block; font-size: 10px; }
+      .timeline-content { padding: 20px; }
+      .timeline-role { font-size: 20px; }
+      .timeline-period { font-size: 12px; padding: 5px 12px; }
+
+      /* Navigation menu on mobile */
+      .cv-nav { display: none; }
+    }
+
+    /* Print Styles */
+    @media print {
+      body { background: white; }
+      .header { background: rgb(16,185,129) !important; }
+      .section { box-shadow: none; border: 1px solid #e0e0e0; }
+      .contact-btn, .project-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with Photo -->
+  <header class="header">
+    <div class="profile-photo-wrapper">
+      <img src="ja1_transparent.png" alt="Michal Bürgermeister" class="profile-photo">
+    </div>
+    <h1>Michal Bürgermeister</h1>
+    <div class="subtitle">
+      <span class="react">React 18</span> &
+      <span class="typescript">TypeScript 5</span> Developer |
+      <span class="ai">AI-Assisted</span>
+      <span class="integration">Development</span>
+      <span class="specialist">Expert</span>
+    </div>
+    <div class="contact-buttons">
+      <a href="tel:+420605954429" class="contact-btn">
+        <i class="fas fa-phone"></i> +420 605 954 429
+      </a>
+      <a href="https://github.com/Buggy1111" target="_blank" class="contact-btn">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/michal-burgermeister-889b10340" target="_blank" class="contact-btn">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="https://portfolio-web-two-mu.vercel.app" target="_blank" class="contact-btn">
+        <i class="fas fa-globe"></i> Portfolio
+      </a>
+    </div>
+  </header>
+
+  <!-- Sticky Navigation -->
+  <nav class="cv-nav" id="cvNav">
+    <div class="nav-dot" data-section="summary">
+      <div class="nav-tooltip">Professional Summary</div>
+    </div>
+    <div class="nav-dot" data-section="skills">
+      <div class="nav-tooltip">Technical Skills</div>
+    </div>
+    <div class="nav-dot" data-section="projects">
+      <div class="nav-tooltip">Projects</div>
+    </div>
+    <div class="nav-dot" data-section="education">
+      <div class="nav-tooltip">Education</div>
+    </div>
+    <div class="nav-dot" data-section="experience">
+      <div class="nav-tooltip">Experience</div>
+    </div>
+    <div class="nav-dot" data-section="languages">
+      <div class="nav-tooltip">Languages</div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Professional Summary -->
+    <section class="section" id="summary">
+      <h2 class="section-title">
+        <i class="fas fa-user-circle"></i>
+        Professional Summary
+      </h2>
+      <p>
+        <strong>Self-taught full-stack developer</strong> s <strong>3 lety praktických zkušeností</strong> ve vývoji moderních webových
+        aplikací. Specializuji se na <strong style="color: rgb(97,218,251);">React 18</strong>, <strong style="color: rgb(239,68,68);">TypeScript 5</strong> a <strong style="color: rgb(16,185,129);">Next.js 14</strong> s důrazem na <strong style="color: rgb(168,85,247);">AI-assisted development</strong> — používám <strong>Claude Code & AI pair programming</strong> pro 2-3× rychlejší development cycle a vyšší kvalitu kódu. <strong>Early adopter AI technologií</strong> (J.A.R.V.I.S. AI assistant vytvořen v 2022, před ChatGPT boomem).
+      </p>
+      <p style="margin-top: 15px;">
+        Vytvořil jsem <strong>4 produkční projekty</strong> s reálnými uživateli (včetně multiplayer aplikace s ratingem <strong>4.9/5 ⭐</strong>), vysokou dostupností
+        a prokazatelnou business hodnotou. Kombinuji <strong>technické dovednosti</strong> s <strong>goal-oriented mindsetem</strong>, <strong>samostatností</strong>
+        a schopností <strong>dodávat projekty včas a v požadované kvalitě</strong>. Unique background: <strong>přechod z automotive průmyslu</strong> (autokarosář) do software developmentu — přináším precision mindset a attention to detail.
+      </p>
+    </section>
+
+    <!-- Core Technical Skills -->
+    <section class="section" id="skills">
+      <h2 class="section-title">
+        <i class="fas fa-code"></i>
+        Core Technical Skills
+      </h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Frontend Development</h3>
+          <p>React 18, Next.js 14, TypeScript 5, JavaScript ES6+, State Management (Redux Toolkit, RTK Query, Context API), HTML5, CSS3</p>
+        </div>
+        <div class="skill-card">
+          <h3>Styling & Design</h3>
+          <p>Tailwind CSS, CSS Modules, Responsive Design, Mobile-First</p>
+        </div>
+        <div class="skill-card">
+          <h3>Development Tools & AI</h3>
+          <p>Git, GitHub, Vercel, AI-Assisted Development (Claude Code, Cursor AI), VS Code, Chrome DevTools</p>
+        </div>
+        <div class="skill-card">
+          <h3>Backend & APIs</h3>
+          <p>Node.js, REST APIs, API Integration, Firebase, Authentication</p>
+        </div>
+        <div class="skill-card">
+          <h3>Collaboration & Workflow</h3>
+          <p>Git Workflows (Feature Branches, PRs), Code Review Mindset, Documentation (README, API docs), Agile Principles, Async Communication</p>
+        </div>
+        <div class="skill-card">
+          <h3>Testing & QA</h3>
+          <p>Jest, Playwright, Component Testing, E2E Testing, Test-Driven Development</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="section" id="projects">
+      <h2 class="section-title">
+        <i class="fas fa-rocket"></i>
+        Featured Projects
+      </h2>
+
+      <div class="project-card">
+        <h3><i class="fas fa-gamepad"></i> Žluté Auto - Multiplayer Game</h3>
+        <div class="project-meta">
+          <i class="fas fa-calendar-alt"></i> 2024-2025
+        </div>
+        <p>
+          Real-time multiplayer online hra pro až 8 hráčů simultánně. Implementace komplexní
+          WebSocket synchronizace, cross-platform kompatibility a responsive game UI. Uživatelské
+          hodnocení 4.9/5 hvězdiček.
+        </p>
+        <p><strong>Tech Stack:</strong> <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Next.js 14</span>, <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">TypeScript (92%)</span>, <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">WebSocket</span>, Real-time State Management</p>
+        <p><strong>Key Features:</strong> Multiplayer synchronizace, automatic scoring, achievement tracking,
+          cross-platform support (web/mobile), sound effects, game history logging</p>
+        <p><strong>Achievements:</strong> 4.9/5 user rating, zero-downtime deployment, mobile-first responsive design</p>
+        <div class="project-links">
+          <a href="https://zlute-auto.vercel.app" target="_blank" class="project-btn">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+          <a href="https://github.com/Buggy1111" target="_blank" class="project-btn">
+            <i class="fab fa-github"></i> Source Code
+          </a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3><i class="fas fa-shopping-cart"></i> Tlačenka Royale - Order Management System</h3>
+        <div class="project-meta">
+          <i class="fas fa-calendar-alt"></i> 2024
+        </div>
+        <p>
+          Full-stack business aplikace s komplexním customer order flow a admin dashboardem.
+          Implementace secure authentication, real-time analytics a data export functionality.
+        </p>
+        <p><strong>Tech Stack:</strong> <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Next.js 14.2.5</span>, <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">TypeScript (95.7%)</span>, HTTPOnly Cookies Authentication</p>
+        <p><strong>Key Features:</strong> Customer ordering form, admin dashboard s real-time metrikami,
+          secure authentication, data export (CSV/JSON), advanced filtering, responsive design</p>
+        <p><strong>Architecture:</strong> Separation of concerns (customer/admin), API routes, middleware protection,
+          state management, form validation</p>
+        <div class="project-links">
+          <a href="https://tlacenka-cz.vercel.app" target="_blank" class="project-btn">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+          <a href="https://github.com/Buggy1111" target="_blank" class="project-btn">
+            <i class="fab fa-github"></i> Source Code
+          </a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3><i class="fas fa-fire-extinguisher"></i> SDH Kamenka - Corporate Website</h3>
+        <div class="project-meta">
+          <i class="fas fa-calendar-alt"></i> 2024
+        </div>
+        <p>
+          Profesionální corporate website pro hasičskou organizaci s pokročilým SEO setupem,
+          comprehensive testing coverage a modern developer experience.
+        </p>
+        <p><strong>Tech Stack:</strong> <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Next.js</span>, <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">TypeScript (65.6%)</span>, <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">SEO Optimization</span>, Structured Data (JSON-LD)</p>
+        <p><strong>Key Features:</strong> 7 plně funkčních sekcí (Historie, Aktivity, Kalendář, Galerie),
+          advanced SEO (schema markup, sitemap), social media integration, contact forms</p>
+        <p><strong>Quality Assurance:</strong> Jest unit testing, Playwright E2E testing, Core Web Vitals optimization,
+          accessibility compliance</p>
+        <div class="project-links">
+          <a href="https://sdh-kamenka.vercel.app" target="_blank" class="project-btn">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+          <a href="https://github.com/Buggy1111" target="_blank" class="project-btn">
+            <i class="fab fa-github"></i> Source Code
+          </a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3><i class="fas fa-robot"></i> J.A.R.V.I.S. AI Assistant - Chrome Extension</h3>
+        <div class="project-meta">
+          <i class="fas fa-calendar-alt"></i> 2022
+        </div>
+        <p>
+          Chrome Extension s AI-powered chat rozhraním - vytvořeno před ChatGPT boomem (2022).
+          Demonstrates early adoption AI technologií a vanilla JavaScript mastery.
+        </p>
+        <p><strong>Tech Stack:</strong> <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Vanilla JavaScript</span>, <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Chrome Extension API (Manifest V3)</span>, <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Make.com Webhook Integration</span></p>
+        <p><strong>Key Features:</strong> Universal content injection, draggable modal window, conversation persistence
+          (localStorage), Iron Man themed UI, custom CSS animations, background service worker</p>
+        <p><strong>Technical Highlights:</strong> Advanced DOM manipulation, event delegation patterns,
+          Mutation Observer API, custom drag-and-drop implementation, responsive design</p>
+        <div class="project-links">
+          <a href="https://github.com/Buggy1111/J.A.R.V.I.S" target="_blank" class="project-btn">
+            <i class="fab fa-github"></i> GitHub Repository
+          </a>
+          <a href="https://github.com/Buggy1111/J.A.R.V.I.S#readme" target="_blank" class="project-btn">
+            <i class="fas fa-book"></i> Documentation
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Certifications -->
+    <section class="section" id="education">
+      <h2 class="section-title">
+        <i class="fas fa-graduation-cap"></i>
+        Education & Certifications
+      </h2>
+
+      <div class="education-card">
+        <h4><i class="fas fa-certificate"></i> Osvědčení o Rekvalifikaci - TVORBA WWW APLIKACÍ</h4>
+        <div class="education-where">
+          <i class="fas fa-map-marker-alt"></i> ITnetwork s.r.o. | Akreditováno MŠMT dne 11. 12. 2024 pod čj.: MSMT-19602/2024-5
+        </div>
+        <div class="education-where">
+          <i class="fas fa-calendar-alt"></i> 1. 3. 2025 - 19. 8. 2025 | 193 vyučovacích hodin
+        </div>
+        <p><strong>Rekvalifikační program pro pracovní činnost: Tvorba www aplikací</strong></p>
+        <p>Obsah programu: <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Základní konstrukce jazyka Python</span> (26h), <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Objektově-orientované programování v Python</span> (35h), <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Kolekce v Python</span> (11h), <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Django</span> (23h), <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">SQLite</span> (21h), <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Základní konstrukce jazyka JavaScript</span> (22h), <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Základy React</span> (20h), <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Firemní vývoj v Python – GIT a testování</span> (8h), <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Moderní webdesign</span> (18h), <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Best Practices</span> (8h)</p>
+        <p><strong>Úspěšně složené závěrečné zkoušky: 19. 8. 2025</strong></p>
+        <button onclick="openCertModal(['cestifikaty/Certificate Python Basic.jpg', 'cestifikaty/Certificate Python Basic1.jpg'])" class="cert-btn">
+          <i class="fas fa-eye"></i> Zobrazit osvědčení
+        </button>
+      </div>
+
+      <div class="education-card">
+        <h4><i class="fas fa-certificate"></i> MASTER OF AI CREATIVITY</h4>
+        <div class="education-where">
+          <i class="fas fa-map-marker-alt"></i> Talent Innovation s.r.o. | ChatGPT Akademie - umělá inteligence (AI)
+        </div>
+        <div class="education-where">
+          <i class="fas fa-calendar-alt"></i> 16. 9. 2024 - 23. 10. 2024 | 24 hodin
+        </div>
+        <p><strong>Certifikát č.: 2024-03-292</strong></p>
+        <p>Pokročilý vzdělávací kurz zaměřený na praktické využití <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">umělé inteligence</span> v osobním i pracovním životě. Absolvování kurzu s úspěšnou realizací závěrečné zkoušky. Kurz vedený vzdělávaví a personální agenturou <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Talent Innovation s.r.o.</span>, s cílem zvýšit produktivitu a zjednodušit všední úkoly pomocí AI nástrojů.</p>
+        <button onclick="openCertModal('cestifikaty/master of IA.jpg')" class="cert-btn">
+          <i class="fas fa-eye"></i> Zobrazit certifikát
+        </button>
+      </div>
+
+      <div class="education-card">
+        <h4><i class="fas fa-certificate"></i> Umělá inteligence v praxi - Coalbrain 2024</h4>
+        <div class="education-where">
+          <i class="fas fa-map-marker-alt"></i> Coalsoft s.r.o. | Coalbrain 2024 Workshop
+        </div>
+        <div class="education-where">
+          <i class="fas fa-calendar-alt"></i> 19. 6. 2024 - 20. 6. 2024 | 16 hodin
+        </div>
+        <p><strong>Osvědčení o absolvování kurzu - 15 hodin dovolené týdně!</strong></p>
+        <p>Komplexní praktický workshop zaměřený na využití <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">umělé inteligence v praxi</span>. Kurz probíhal formou distančního vzdělávání v jazyce českém, organizovaný společností <span style="color: #1a1a1a; background: rgba(255,255,255,0.9); padding: 2px 8px; border-radius: 4px; font-weight: 900;">Coalsoft s.r.o.</span> (Brno). Zaměřeno na maximalizaci produktivity a efektivní aplikaci AI nástrojů v každodenních úkolech.</p>
+        <p><strong>Vydáno: 20. 6. 2024</strong></p>
+        <button onclick="openCertModal('cestifikaty/coalbrain.png')" class="cert-btn">
+          <i class="fas fa-eye"></i> Zobrazit osvědčení
+        </button>
+      </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="section" id="experience">
+      <h2 class="section-title">
+        <i class="fas fa-briefcase"></i>
+        Professional Experience
+      </h2>
+
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">
+            <div class="timeline-year-number">2024</div>
+            <div class="timeline-year-label">Současnost</div>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-role">Freelance Full-Stack Web Developer</h3>
+            <div class="timeline-period">
+              <i class="fas fa-calendar-alt"></i>
+              Únor 2024 - současnost
+            </div>
+            <p class="timeline-description">
+              <strong>Modern web development</strong> se specializací na React ecosystem a AI-assisted programming.
+              Realizace komplexních full-stack projektů od návrhu až po deployment s důrazem na kvalitu, rychlost a business hodnotu.
+            </p>
+            <ul class="timeline-highlights">
+              <li><strong>4 produkční aplikace</strong> s reálnými uživateli a měřitelným business impactem</li>
+              <li><strong>Modern tech stack:</strong> Next.js 14, React 18, TypeScript, Tailwind CSS</li>
+              <li><strong>Complex features:</strong> real-time synchronizace, authentication, admin dashboards, SEO</li>
+              <li><strong>AI pair programming:</strong> 2-3× rychlejší development s Claude Code & ChatGPT</li>
+              <li><strong>Full ownership:</strong> analýza, design, vývoj, testování, deployment, údržba</li>
+              <li><strong>Track record:</strong> 100% on-time delivery, vysoká spokojenost klientů</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">
+            <div class="timeline-year-number">2022</div>
+            <div class="timeline-year-label">Learning</div>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-role">Self-Taught Developer Journey</h3>
+            <div class="timeline-period">
+              <i class="fas fa-laptop-code"></i>
+              2022 - 2024
+            </div>
+            <p class="timeline-description">
+              <strong>Intenzivní samostudium</strong> zaměřené na moderní web development technologie.
+              Kombinace strukturovaného učení s praktickými projekty a aktivní komunitní účastí.
+            </p>
+            <ul class="timeline-highlights">
+              <li><strong>Oficiální dokumentace:</strong> React, Next.js, TypeScript deep-dive</li>
+              <li><strong>Online kurzy:</strong> ITnetwork, FreeCodeCamp, specializované bootcampy</li>
+              <li><strong>Hands-on projekty:</strong> Chrome extension, multiplayer hry, business aplikace</li>
+              <li><strong>AI adoption:</strong> Early adopter AI nástrojů (J.A.R.V.I.S. assistant 2022)</li>
+              <li><strong>Open-source:</strong> Aktivní čtení kódu, contributor mindset</li>
+              <li><strong>Community:</strong> Stack Overflow, GitHub discussions, dev blogs</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">
+            <div class="timeline-year-number">~2020</div>
+            <div class="timeline-year-label">Previous</div>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-role">Automotive Body Technician</h3>
+            <div class="timeline-period">
+              <i class="fas fa-car"></i>
+              Předchozí kariéra
+            </div>
+            <p class="timeline-description">
+              <strong>Vyučený autokarosář</strong> s praktickými dovednostmi v precision work a systematické diagnostice problémů.
+              Background, který přináší <strong>unikátní perspektivu do automotive tech companies</strong> — rozumím jak technické preciznosti potřebné v automotive průmyslu, tak moderním software řešením pro digitalizaci tohoto sektoru.
+            </p>
+            <ul class="timeline-highlights">
+              <li><strong>Automotive industry expertise:</strong> Deep understanding průmyslu, do kterého vytvářím software</li>
+              <li><strong>Attention to detail:</strong> Preciznost z manuální práce aplikovaná v čistém, maintainable kódu</li>
+              <li><strong>Problem diagnosis:</strong> Metodický debugging approach z diagnostiky technických problémů</li>
+              <li><strong>Complex projects:</strong> Zkušenost s dokončováním náročných, multi-step úkolů pod tlakem</li>
+              <li><strong>Quality focus:</strong> Vysoké standardy z automotive průmyslu (zero-defect mindset)</li>
+              <li><strong>Transferable skills:</strong> Patience, persistence, hands-on practical problem-solving</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Language Skills -->
+    <section class="section" id="languages">
+      <h2 class="section-title">
+        <i class="fas fa-language"></i>
+        Jazykové dovednosti
+      </h2>
+      <div class="languages-grid">
+        <div class="language-card">
+          <strong>🇨🇿 Čeština</strong>
+          <span>Rodilý mluvčí - Profesionální úroveň</span>
+        </div>
+        <div class="language-card">
+          <strong>🇬🇧 Angličtina</strong>
+          <span>Základní komunikace (A2) - Čtení tech dokumentace, aktivně se zlepšuji</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Certificate Modal -->
+  <div id="certModal" class="cert-modal" onclick="closeCertModal(event)">
+    <div class="cert-modal-content" onclick="event.stopPropagation()">
+      <button class="cert-modal-close" onclick="closeCertModal()">
+        <i class="fas fa-times"></i>
+      </button>
+      <button id="certPrev" class="cert-nav cert-nav-prev hidden" onclick="changeCertPage(-1)">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button id="certNext" class="cert-nav cert-nav-next hidden" onclick="changeCertPage(1)">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <img id="certModalImg" class="cert-modal-img" src="" alt="Certifikát">
+      <div id="certPageCounter" class="cert-page-counter hidden"></div>
+    </div>
+  </div>
+
+  <script>
+    // Scroll Animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Certificate Modal Functions
+    let currentCertImages = [];
+    let currentCertIndex = 0;
+
+    function openCertModal(imageSrc) {
+      const modal = document.getElementById('certModal');
+      const modalImg = document.getElementById('certModalImg');
+      const prevBtn = document.getElementById('certPrev');
+      const nextBtn = document.getElementById('certNext');
+      const counter = document.getElementById('certPageCounter');
+
+      // Check if it's an array of images or single image
+      if (Array.isArray(imageSrc)) {
+        currentCertImages = imageSrc;
+        currentCertIndex = 0;
+
+        // Show navigation if multiple images
+        if (currentCertImages.length > 1) {
+          prevBtn.classList.remove('hidden');
+          nextBtn.classList.remove('hidden');
+          counter.classList.remove('hidden');
+          updateCertCounter();
+        } else {
+          prevBtn.classList.add('hidden');
+          nextBtn.classList.add('hidden');
+          counter.classList.add('hidden');
+        }
+      } else {
+        currentCertImages = [imageSrc];
+        currentCertIndex = 0;
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+        counter.classList.add('hidden');
+      }
+
+      modalImg.src = currentCertImages[0];
+      modal.style.display = 'flex';
+
+      // Trigger animation
+      setTimeout(() => {
+        modal.classList.add('active');
+      }, 10);
+
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+    }
+
+    function changeCertPage(direction) {
+      const modalImg = document.getElementById('certModalImg');
+
+      // Fade out
+      modalImg.style.opacity = '0';
+
+      setTimeout(() => {
+        currentCertIndex += direction;
+
+        // Loop around
+        if (currentCertIndex < 0) {
+          currentCertIndex = currentCertImages.length - 1;
+        } else if (currentCertIndex >= currentCertImages.length) {
+          currentCertIndex = 0;
+        }
+
+        modalImg.src = currentCertImages[currentCertIndex];
+        updateCertCounter();
+
+        // Fade in
+        modalImg.style.opacity = '1';
+      }, 300);
+    }
+
+    function updateCertCounter() {
+      const counter = document.getElementById('certPageCounter');
+      counter.textContent = `${currentCertIndex + 1} / ${currentCertImages.length}`;
+    }
+
+    function closeCertModal(event) {
+      const modal = document.getElementById('certModal');
+
+      // Close only if clicking backdrop or close button
+      if (!event || event.target === modal || event.currentTarget.classList.contains('cert-modal-close')) {
+        modal.classList.remove('active');
+
+        setTimeout(() => {
+          modal.style.display = 'none';
+          document.getElementById('certModalImg').src = '';
+          currentCertImages = [];
+          currentCertIndex = 0;
+        }, 500);
+
+        // Restore body scroll
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeCertModal();
+      } else if (e.key === 'ArrowLeft' && currentCertImages.length > 1) {
+        changeCertPage(-1);
+      } else if (e.key === 'ArrowRight' && currentCertImages.length > 1) {
+        changeCertPage(1);
+      }
+    });
+
+    // Navigation Menu Functions
+    const navDots = document.querySelectorAll('.nav-dot');
+    const sections = document.querySelectorAll('.section[id]');
+
+    // Smooth scroll on click
+    navDots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const sectionId = dot.getAttribute('data-section');
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Update active dot on scroll
+    function updateActiveNav() {
+      let current = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+
+        if (window.scrollY >= (sectionTop - 200)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navDots.forEach(dot => {
+        dot.classList.remove('active');
+        if (dot.getAttribute('data-section') === current) {
+          dot.classList.add('active');
+        }
+      });
+    }
+
+    // Listen to scroll
+    window.addEventListener('scroll', updateActiveNav);
+
+    // Initial call
+    updateActiveNav();
+  </script>
+</body>
+</html>
